@@ -1,75 +1,80 @@
-# 🏢 Aplikasi Penggajian Karyawan PT. Salwarud
+# 🏢 Aplikasi Manajemen Karyawan
 
 <p align="center">
   <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java">
   <img src="https://img.shields.io/badge/NetBeans%20IDE-1B6AC6?style=for-the-badge&logo=apache-netbeans-ide&logoColor=white" alt="NetBeans">
   <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
-  <img src="https://img.shields.io/badge/GlassFish-2C568C?style=for-the-badge&logo=glassfish&logoColor=white" alt="GlassFish">
-  <img src="https://img.shields.io/badge/MVC%20Architecture-blue?style=for-the-badge" alt="MVC Architecture">
+  <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white" alt="Bootstrap 5">
+  <img src="https://img.shields.io/badge/Architecture-MVC%20%26%20DAO-blue?style=for-the-badge" alt="MVC & DAO Architecture">
 </p>
 
-Aplikasi web penggajian karyawan yang dirancang untuk mengelola data gaji secara efisien. Proyek ini dibangun sepenuhnya dengan **Java** menggunakan **NetBeans IDE 8.2** dan menerapkan pola desain **Model-View-Controller (MVC)** untuk memastikan kode yang terstruktur dan mudah dikelola.
+Aplikasi web untuk manajemen data karyawan, dibangun sepenuhnya dengan **Java Servlet** menggunakan **NetBeans IDE**. Proyek ini menerapkan pola desain **Model-View-Controller (MVC)** dan **Data Access Object (DAO)** untuk memastikan kode yang terstruktur, terorganisir, dan mudah dikelola.
 
 ---
 
 ## ✨ Fitur Utama
 
--   **👤 Manajemen Karyawan:** Operasi CRUD (Create, Read, Update, Delete) penuh untuk data karyawan.
--   **🛠️ Manajemen Pekerjaan:** Mengelola data master pekerjaan beserta detailnya.
--   **💰 Transaksi Gaji:** Memproses, menghitung, dan menyimpan riwayat gaji karyawan.
--   **🔐 Sistem Login & Keamanan:** Sistem otentikasi pengguna dengan enkripsi password (kemungkinan MD5 atau SHA).
--   **🔍 Pencarian Data:** Fitur pencarian untuk data gaji berdasarkan KTP atau kode pekerjaan.
--   **📄 Laporan Dinamis:** Menghasilkan laporan penggajian yang fleksibel, kemungkinan menggunakan **JasperReports**, yang dapat diekspor ke berbagai format.
+-   **🔐 Sistem Otentikasi:** Sistem login dan logout yang aman untuk admin, lengkap dengan filter untuk melindungi halaman.
+-   **👤 Manajemen Admin:** Operasi CRUD (Create, Read, Update, Delete) penuh untuk mengelola pengguna/admin aplikasi.
+-   **🧑‍🎓 Manajemen Karyawan:** Mengelola data master karyawan (NIK, Nama, Kontak) beserta jabatannya.
+-   **🛠️ Manajemen Jabatan:** Mengelola data master jabatan (Nama Jabatan, Gaji Pokok).
+-   **🔒 Keamanan Password:** Enkripsi password menggunakan algoritma **SHA-256** untuk keamanan data login.
+-   **🔍 Fitur Pencarian:** Fungsi pencarian karyawan berdasarkan NIK atau Nama.
+-   **🎨 Antarmuka Modern:** Tampilan antarmuka yang bersih dan responsif dibangun dengan **Bootstrap 5**.
 
 ---
 
 ## 🏗️ Arsitektur & Teknologi
 
-Aplikasi ini dibangun di atas tumpukan teknologi Java EE klasik dan mengikuti arsitektur MVC yang jelas untuk memisahkan logika bisnis, data, dan presentasi.
+Aplikasi ini dibangun di atas tumpukan teknologi Java EE klasik dan mengikuti arsitektur berlapis yang memisahkan antara data (Model), tampilan (View), dan kontrol alur aplikasi (Controller).
 
-| Kategori | Teknologi / Pustaka |
-| :--- | :--- |
-| **Bahasa** | `Java` |
-| **IDE** | `NetBeans IDE 8.2` |
-| **Server** | `GlassFish Server` |
-| **Database** | `MySQL` (terhubung via JDBC) |
-| **Pelaporan** | Kemungkinan `JasperReports` |
-| **Dependensi** | `MySQL JDBC Driver` |
+| Kategori       | Teknologi / Pustaka                                    |
+| :------------- | :----------------------------------------------------- |
+| **Bahasa** | `Java`                                                 |
+| **IDE** | `NetBeans IDE 8.2+`                                    |
+| **Server** | `GlassFish Server` / `Apache Tomcat`                   |
+| **Database** | `MySQL` (terhubung via JDBC)                           |
+| **Frontend** | `Bootstrap 5` (via CDN)                                |
+| **Dependensi** | `MySQL Connector/J`                                    |
 
 <br>
 
 <details>
 <summary>📂 Struktur Proyek</summary>
+
 <pre>
-AplikasiGajiKaryawan/
+AplikasiManajemenKaryawan/
 ├── src/
 │   └── java/
 │       └── com/
-│           └── unpam/
-│               ├── <strong>controller/</strong> (Logika & Alur Aplikasi)
-│               │   ├── GajiController.java
+│           └── karyawan/
+│               ├── <strong>controller/</strong>  (Logika & Alur Aplikasi)
+│               │   ├── AdminController.java
+│               │   ├── JabatanController.java
 │               │   ├── KaryawanController.java
-│               │   ├── LaporanGajiController.java
 │               │   ├── LoginController.java
 │               │   ├── LogoutController.java
-│               │   └── PekerjaanController.java
+│               │   └── LoginFilter.java
 │               │
-│               ├── <strong>model/</strong> (Data & Logika Bisnis)
-│               │   ├── CompileReport.java
+│               ├── <strong>model/</strong>         (Logika Bisnis & Database)
 │               │   ├── Enkripsi.java
-│               │   ├── Gaji.java
+│               │   ├── Jabatan.java
+│               │   ├── JabatanDAO.java
 │               │   ├── Karyawan.java
-│               │   ├── Koneksi.java
-│               │   └── Pekerjaan.java
+│               │   ├── KaryawanDAO.java
+│               │   └── User.java
 │               │
-│               └── <strong>view/</strong> (Tampilan & UI)
-│                   ├── MainForm.java
-│                   └── PesanDialog.java
+│               ├── <strong>util/</strong>          (Kelas Bantuan)
+│               │   └── Koneksi.java
+│               │
+│               └── <strong>view/</strong>          (Komponen Tampilan)
+│                   └── Layout.java
 │
 ├── web/
-│   ├── WEB-INF/
-│   │   └── web.xml
-│   └── style.css
+│   └── WEB-INF/
+│       ├── lib/
+│       │   └── mysql-connector-j-x.x.x.jar
+│       └── web.xml
 │
 └── build.xml
 </pre>
@@ -77,88 +82,39 @@ AplikasiGajiKaryawan/
 
 ---
 
-## 🚀 Alur Kerja Aplikasi
+## 🚀 Panduan Instalasi & Penggunaan
 
-1.  **Login:** Pengguna melakukan otentikasi melalui `LoginController`.
-2.  **Dashboard:** Setelah berhasil, pengguna diarahkan ke `MainForm` yang menjadi pusat navigasi.
-3.  **Manajemen Data:** Pengguna mengelola data Karyawan, Pekerjaan, atau Gaji melalui `Controller` yang sesuai.
-4.  **Pembuatan Laporan:** `LaporanGajiController` memproses permintaan laporan dan menggunakan `CompileReport.java` untuk menghasilkan output.
+### **Prasyarat**
+1.  **JDK (Java Development Kit)** versi 8 atau lebih tinggi.
+2.  **IDE NetBeans** (disarankan versi yang mendukung Java EE).
+3.  **Server Web** (Apache Tomcat atau GlassFish).
+4.  **Database MySQL** (disarankan menggunakan XAMPP).
+
+### **Langkah-langkah Instalasi**
+
+1.  **Setup Database**
+    - Buka **phpMyAdmin** dan buat database baru bernama `db_manajemen_karyawan`.
+    - Jalankan query SQL yang sesuai untuk membuat tabel `users`, `jabatan`, dan `karyawan`, lalu isi data admin awal.
+
+2.  **Buka Proyek**
+    - Buka NetBeans, pilih `File > Open Project`, dan arahkan ke folder proyek ini.
+
+3.  **Konfigurasi Koneksi**
+    - Pastikan driver `mysql-connector-j-x.x.x.jar` sudah ada di folder `web/WEB-INF/lib/` atau di Libraries proyek.
+    - Jika perlu, sesuaikan `USER` dan `PASSWORD` database di file `src/java/com/karyawan/util/Koneksi.java`.
+
+4.  **Jalankan Aplikasi**
+    - Klik kanan pada proyek, pilih **Clean and Build**.
+    - Setelah selesai, klik kanan lagi dan pilih **Run**.
+
+### **Akses dan Penggunaan Aplikasi**
+- Buka browser dan akses aplikasi yang berjalan (misalnya `http://localhost:8080/NamaProyekAnda/`).
+- Anda akan diarahkan ke halaman login. Gunakan kredensial default:
+  - **Username**: `admin`
+  - **Password**: `admin`
+- Setelah login, Anda dapat mulai mengelola data melalui menu navigasi yang tersedia.
 
 <br>
-
-<details>
-<summary>📦 Contoh Kode Model (Koneksi.java)</summary>
-
-```java
-// com/unpam/model/Koneksi.java
-package com.unpam.model;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
-
-public class Koneksi {
-    public Connection con;
-    public Statement stm;
-
-    public void koneksi() {
-        try {
-            String url = "jdbc:mysql://localhost/dbaplikasigajikaryawan";
-            String username = "root";
-            String password = ""; // Sesuaikan jika perlu
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection(url, username, password);
-            stm = con.createStatement();
-        } catch (Exception e) {
-            System.err.println("Koneksi Gagal: " + e.getMessage());
-        }
-    }
-}
-```
-</details>
-
-<details>
-<summary>🎮 Contoh Kode Controller (KaryawanController.java)</summary>
-
-```java
-// com/unpam/controller/KaryawanController.java
-package com.unpam.controller;
-
-import com.unpam.model.Karyawan;
-import com.unpam.view.MainForm;
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-@WebServlet(name = "KaryawanController", urlPatterns = {"/KaryawanController"})
-public class KaryawanController extends HttpServlet {
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            Karyawan karyawan = new Karyawan();
-            String proses = request.getParameter("proses");
-            String[] data = null;
-            
-            if (proses != null) {
-                // Logika untuk simpan, ubah, atau hapus data
-            }
-
-            // Tampilkan view
-            MainForm.buka(request, response, "Karyawan", karyawan.tampilData());
-        }
-    }
-    // ... metode doGet dan doPost
-}
-```
-</details>
-<br>
-
 <div align="center">
-  Dibuat dengan Java Servlet & MVC Pattern
+  Dibuat dengan Java Servlet, MVC, dan DAO Pattern
 </div>
