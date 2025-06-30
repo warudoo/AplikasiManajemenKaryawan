@@ -22,7 +22,7 @@ public class Layout {
         out.println("<!DOCTYPE html><html lang='en'><head>");
         out.println("<meta charset='UTF-8'>");
         out.println("<meta name='viewport' content='width=device-width, initial-scale=1.0'>");
-        out.println("<title>" + title + " - HRMS</title>");
+        out.println("<title>" + title + " - PT Warud</title>");
         out.println("<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css' rel='stylesheet'>");
         out.println("<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>");
         out.println("</head><body>");
